@@ -4,9 +4,10 @@ import TransferService from "../services/TransferService";
 
 class Store {
     defaultUser = {
-        username: '',
+        name: '',
         email: '',
         bio: '',
+        number: '',
     }
     user = {...this.defaultUser}
     localStorage = {
@@ -36,10 +37,10 @@ class Store {
         return toJS(this.user)
     }
 
-    async makeTransfer({ username, amount }) {
+    async makeTransfer({ number, amount }) {
         const response = await TransferService.makeTransfer({
-            from: this.user.username,
-            to: username,
+            from: this.user.number,
+            to: number,
             amount: amount,
         })
 

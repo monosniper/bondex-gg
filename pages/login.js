@@ -3,6 +3,8 @@ import styles from "../styles/pages/Login.module.scss";
 import InlineButton from "../components/InlineButton";
 import {useRouter} from "next/router";
 import store from "../store/store";
+import Link from "next/link";
+import {$routes} from "../http/routes";
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -29,10 +31,14 @@ const Login = () => {
                 <div className={'label'}>Password</div>
                 <input type="password" placeholder={'Password'} name={'password'} value={password} onChange={handlePasswordChange} className={'input'} required />
 
-                <div className={'center'}>
+                <div className={'center ' + styles.footer}>
                     <InlineButton
+                        onClick={handleLogin}
                         text={'Login'}
                     />
+                    <Link href={$routes.register}>
+                        Register
+                    </Link>
                 </div>
             </div>
         </div>

@@ -12,19 +12,14 @@ import styles from "../styles/pages/Edit.module.scss";
 import InlineButton from "../components/InlineButton";
 import {BsCheckCircleFill} from "react-icons/bs";
 import Layout from "../Layout";
+import store from "../store/store";
 
 const Card = () => {
-    const [user, setUser] = useState({
-        email: '',
-        name: '',
-        bio: ''
-    })
+    const [user, setUser] = useState(store.defaultUser)
 
     useEffect(() => {
-        setUser({
-            email: 'vanteateam@gmail.com',
-            name: 'Full Name',
-            bio: 'Lorem ipsum epta kak dela u menya vse ok good cool im a cool motherfucka.'
+        store.getUser().then((data) => {
+            setUser(data)
         })
     }, [])
 
@@ -42,6 +37,9 @@ const Card = () => {
 
                 <div className={'label'}>Address</div>
                 <input type="text" placeholder={'Delivery address'} className={'input'} required />
+
+                <div className={'label'}>Post Index</div>
+                <input type="text" placeholder={'Post Index'} className={'input'} required />
 
                 <div className={'label'}>Comment</div>
                 <textarea placeholder={'Your comment for the delivery...'} rows={8} className={'input'} />

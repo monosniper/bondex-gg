@@ -8,7 +8,7 @@ import Layout from "../../Layout";
 const Edit = () => {
     const [user, setUser] = useState(store.defaultUser)
 
-    const [username, setUsername] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [bio, setBio] = useState('')
     const [oldPassword, setOldPassword] = useState('')
@@ -16,7 +16,7 @@ const Edit = () => {
     const [oldPasswordAgain, setNewPasswordAgain] = useState('')
 
     const handleEmailChange = (e) => setEmail(e.target.value)
-    const handleUsernameChange = (e) => setUsername(e.target.value)
+    const handleNameChange = (e) => setName(e.target.value)
     const handleOldPasswordChange = (e) => setOldPassword(e.target.value)
     const handleNewPasswordChange = (e) => setNewPassword(e.target.value)
     const handleNewPasswordAgainChange = (e) => setNewPasswordAgain(e.target.value)
@@ -25,8 +25,8 @@ const Edit = () => {
     useEffect(() => {
         store.getUser().then((data) => {
             setUser(data)
-            console.log(user.username)
-            setUsername(user.username)
+
+            setName(user.name)
             setEmail(user.email)
             setBio(user.bio)
         })
@@ -39,8 +39,8 @@ const Edit = () => {
                 <input type="email" placeholder={'E-mail address'} value={email} onChange={handleEmailChange}
                        className={'input'} required/>
 
-                <div className={'label'}>Username</div>
-                <input type="text" placeholder={'Username'} value={username} onChange={handleUsernameChange}
+                <div className={'label'}>Full name</div>
+                <input type="text" placeholder={'Full name'} value={name} onChange={handleNameChange}
                        className={'input'} required/>
 
                 <div className={'label'}>Password</div>

@@ -22,9 +22,9 @@ const Profile = () => {
 
     return (
         <Layout>
-            <Avatar name={user.username} />
+            <Avatar name={user.name} />
 
-            <FullName name={user.username} />
+            <FullName name={user.name} />
 
             <div className={'center'}>
                 <Link href={'/profile/edit'}>

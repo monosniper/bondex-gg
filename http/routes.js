@@ -2,6 +2,7 @@ export const $routes = {
     index: '/',
     register: '/register',
     login: '/login',
+    profile: '/profile',
 }
 
 export const $apiRoutes = {

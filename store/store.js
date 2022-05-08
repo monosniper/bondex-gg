@@ -13,6 +13,7 @@ class Store {
     localStorage = {
         user: 'user',
     }
+    isSidebarShow = false
 
     constructor() {
         makeAutoObservable(this);
@@ -20,6 +21,10 @@ class Store {
 
     setUser(user) {
         this.user = user;
+    }
+
+    setSidebar(bool) {
+        this.isSidebarShow = bool
     }
 
     async getUser() {

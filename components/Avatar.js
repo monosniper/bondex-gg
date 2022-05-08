@@ -5,7 +5,7 @@ import Image from "next/image";
 const Avatar = ({ name }) => {
     return (
         <div className={styles.avatar}>
-            <img src="/assets/img/avatar.jpg" alt={name}/>
+            <img src="/assets/img/avatar.png" alt={name}/>
         </div>
     );
 };

@@ -9,12 +9,7 @@ const Header = () => {
     return (
         <div className={styles.header + ' card'}>
             <div className={styles.avatar}>
-                <Image
-                    src={'/../public/assets/img/ava.jpg'}
-                    width={50}
-                    height={50}
-                    alt={user.name}
-                />
+                <img src="/assets/img/avatar.jpg" alt={user.name} />
             </div>
             <div className={styles.logo}>
                 {process.env.NEXT_PUBLIC_APP_NAME}

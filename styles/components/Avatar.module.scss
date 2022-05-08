@@ -1,0 +1,22 @@
+@import "../vars";
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 15px 0;
+
+  img {
+    border-radius: 100%;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    background: $active_color;
+    width: 156px;
+    height: 156px;
+    border-radius: 100%;
+  }
+}

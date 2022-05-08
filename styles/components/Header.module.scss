@@ -1,0 +1,38 @@
+@import "../vars";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.logo {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  img {
+    border-radius: 100%;
+  }
+
+  &::before {
+    content: '';
+    background: $active_color;
+    border-radius: 100%;
+    position: absolute;
+    width: 54px;
+    height: 54px;
+  }
+}

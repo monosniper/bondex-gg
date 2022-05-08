@@ -1,0 +1,27 @@
+@import "../vars";
+
+.nav {
+  display: flex;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+
+    svg {
+      color: #fff;
+    }
+
+    &.active {
+      svg {
+        color: $active_color;
+      }
+    }
+  }
+}

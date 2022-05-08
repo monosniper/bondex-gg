@@ -1,0 +1,28 @@
+@import "../vars";
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 40px;
+  outline: none;
+  border: none;
+  width: calc(100% - 20px);
+  background: $active_color;
+  margin: 10px;
+  gap: .3rem;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px 20px;
+}
+
+.button_status {
+  border: 2px solid $active_color;
+  background: none;
+  color: $active_color;
+}
+
+.button_inline {
+  width: fit-content;
+}

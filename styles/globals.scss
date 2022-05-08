@@ -1,0 +1,107 @@
+@import "vars";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: $body_color;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  -webkit-box-shadow: 6px 7px 28px -12px rgb(0, 0, 0 / 75%);
+  -moz-box-shadow: 6px 7px 28px -12px rgba(0,0,0,0.75);
+  box-shadow: 6px 7px 28px -12px rgb(0, 0, 0 / 75%);
+  background: rgb(2,0,36);
+  border-radius: 10px;
+  background: linear-gradient(90deg, #3c405aa6 0%, #272b48b0 100%);
+  backdrop-filter: blur(1px);
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  padding: 0 10px;
+}
+
+.invite_btn {
+  background: #292d4a;
+  border: 2px solid #3b3f59;
+}
+
+.label {
+  color: white;
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+.input {
+  width: 100%;
+  max-width: calc(100vw - 20px);
+  padding: 15px 20px;
+  border: none;
+  background: #33364c;
+  color: white;
+  font-size: 18px;
+  border-radius: 40px;
+  outline: none;
+
+  &+.input {
+    margin-top: 10px;
+  }
+}
+
+.modal_overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #0000004d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_content {
+  width: 300px;
+  max-width: 90vw;
+  background: #191d36;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  line-height: 1.4;
+
+  .close {
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+  }
+}
+
+.modal_header {
+  display: flex;
+  justify-content: flex-end;
+}

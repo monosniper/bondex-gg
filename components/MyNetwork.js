@@ -34,7 +34,7 @@ const MyNetwork = () => {
                         <AiFillCloseCircle size={'1.4em'} />
                     </button>
                 </div>
-                <p>My Network is the number of your referrals / active at the moment. To get referrals click on the button "Invite your contacts!".</p>
+                <p>My Network is the number of your referrals / active at the moment. To get referrals click on the button &quot;Invite your contacts!&quot;.</p>
             </ReactModal>
         </div>
     );

@@ -7,7 +7,6 @@ import store from "../store/store";
 import {RiBook2Fill, RiGitRepositoryPrivateLine} from "react-icons/ri";
 import {GoBook} from "react-icons/go";
 import {observer} from "mobx-react-lite";
-import Link from "next/link";
 import {$routes} from "../http/routes";
 import {useRouter} from "next/router";
 
@@ -15,7 +14,7 @@ const Sidebar = ({ name }) => {
     const router = useRouter()
 
     const handleLogOut = () => {
-        store.logout()
+        store.logout().then(() => router.push($routes.login))
     }
 
     const handleHide = () => {

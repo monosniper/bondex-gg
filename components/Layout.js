@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from "./components/Header";
-import Normalizer from "./components/Normalizer";
-import Navigation from "./components/Navigation";
+import Header from "./Header";
+import Normalizer from "./Normalizer";
+import Navigation from "./Navigation";
 
 const Layout = ({children}) => {
     return (

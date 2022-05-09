@@ -5,20 +5,57 @@ import {useRouter} from "next/router";
 import store from "../store/store";
 import Link from "next/link";
 import {$routes} from "../http/routes";
+import Noty from 'noty'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const [passwordAgain, setPasswordAgain] = useState('')
     const [ref, setRef] = useState(null)
     const router = useRouter()
 
     const handleEmailChange = (e) => setEmail(e.target.value)
     const handleNameChange = (e) => setName(e.target.value)
     const handlePasswordChange = (e) => setPassword(e.target.value)
+    const handlePasswordAgainChange = (e) => setPasswordAgain(e.target.value)
 
     const handleRegister = () => {
-        store.register({email, name, password, ref})
+        if(password !== passwordAgain) {
+            new Noty({
+                theme: 'sunset',
+                type: 'error',
+                text: 'Passwords are not equal!',
+            }).show()
+        } else if(name === '') {
+            new Noty({
+                theme: 'sunset',
+                type: 'error',
+                text: 'The name field is required!',
+            }).show()
+        } else {
+            store.register({email, name, password, ref}).then(rs => {
+                if(rs.status === 'error') {
+                    if(rs.message !== '') {
+                        new Noty({
+                            theme: 'sunset',
+                            type: 'error',
+                            text: rs.message,
+                        }).show()
+                    }
+
+                    rs.errors.forEach((err) => {
+                        new Noty({
+                            theme: 'sunset',
+                            type: 'error',
+                            text: `${err.param}: ${err.msg}`,
+                        }).show()
+                    })
+                } else {
+                    router.push($routes.index)
+                }
+            })
+        }
     }
 
     useEffect(() => {
@@ -42,6 +79,9 @@ const Login = () => {
 
                 <div className={'label'}>Password</div>
                 <input type="password" placeholder={'Password'} name={'password'} value={password} onChange={handlePasswordChange} className={'input'} required />
+
+                <div className={'label'}>Password again</div>
+                <input type="password" placeholder={'Password again'} name={'password_confirmation'} value={passwordAgain} onChange={handlePasswordAgainChange} className={'input'} required />
 
                 <div className={'center ' + styles.footer}>
                     <InlineButton

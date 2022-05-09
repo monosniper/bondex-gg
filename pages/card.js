@@ -1,48 +1,40 @@
-import React, {useEffect, useState} from 'react';
-import Header from "../components/Header";
-import Normalizer from "../components/Normalizer";
-import Balance from "../components/Balance";
-import Button from "../components/Button";
-import {FaUserPlus} from "react-icons/fa";
-import TokenRate from "../components/TokenRate";
-import MyNetwork from "../components/MyNetwork";
-import StatusButton from "../components/StatusButton";
-import Navigation from "../components/Navigation";
+import React, {useState} from 'react';
 import styles from "../styles/pages/Edit.module.scss";
 import InlineButton from "../components/InlineButton";
-import {BsCheckCircleFill} from "react-icons/bs";
-import Layout from "../Layout";
+import Layout from "../components/Layout";
 import store from "../store/store";
+import {observer} from "mobx-react-lite";
 
 const Card = () => {
-    const [user, setUser] = useState(store.defaultUser)
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [address, setAddress] = useState('')
+    const [post_index, setPostIndex] = useState('')
+    const [comment, setComment] = useState('')
 
-    useEffect(() => {
-        store.getUser().then((data) => {
-            setUser(data)
-        })
-    }, [])
-
-    const handleEmailChange = (e) => setUser({...user, email: e.target.value})
-    const handleFullNameChange = (e) => setUser({...user, name: e.target.value})
+    const handleEmailChange = (e) => setEmail(e.target.value)
+    const handleFullNameChange = (e) => setName(e.target.value)
+    const handleAddressChange = (e) => setAddress(e.target.value)
+    const handlePostIndexChange = (e) => setPostIndex(e.target.value)
+    const handleCommentChange = (e) => setComment(e.target.value)
 
     return (
         <Layout>
             <div className={styles.wrapper}>
                 <div className={'label'}>Full name</div>
-                <input type="text" placeholder={'Your full name'} value={user.name} onChange={handleEmailChange} className={'input'} required />
+                <input type="text" placeholder={'Your full name'} value={email} onChange={handleEmailChange} className={'input'} required />
 
                 <div className={'label'}>E-mail</div>
-                <input type="email" placeholder={'E-mail address'} value={user.name} onChange={handleFullNameChange} className={'input'} required />
+                <input type="email" placeholder={'E-mail address'} value={name} onChange={handleFullNameChange} className={'input'} required />
 
                 <div className={'label'}>Address</div>
-                <input type="text" placeholder={'Delivery address'} className={'input'} required />
+                <input type="text" placeholder={'Delivery address'} value={address} onChange={handleAddressChange} className={'input'} required />
 
                 <div className={'label'}>Post Index</div>
-                <input type="text" placeholder={'Post Index'} className={'input'} required />
+                <input type="text" placeholder={'Post Index'} value={post_index} onChange={handlePostIndexChange} className={'input'} required />
 
                 <div className={'label'}>Comment</div>
-                <textarea placeholder={'Your comment for the delivery...'} rows={8} className={'input'} />
+                <textarea placeholder={'Your comment for the delivery...'} rows={8} onChange={handleCommentChange} value={comment} className={'input'} />
 
                 <div className={'center'}>
                     <InlineButton
@@ -54,4 +46,4 @@ const Card = () => {
     );
 };
 
-export default Card;
+export default observer(Card);

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-export const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
-export const API_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL + '/api/';
+// export const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
+// export const API_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL + '/api/';
+export const SERVER_URL = 'http://localhost:5000';
+export const API_URL = 'http://localhost:5000' + '/api/';
 
 const $server = axios.create({
     withCredentials: true,

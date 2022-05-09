@@ -9,22 +9,17 @@ import FullName from "../components/FullName";
 import InlineButton from "../components/InlineButton";
 import Bio from "../components/Bio";
 import store from "../store/store";
-import Layout from "../Layout";
+import Layout from "../components/Layout";
+import {observer} from "mobx-react-lite";
 
 const Profile = () => {
-    const [user, setUser] = useState(store.defaultUser)
-
-    useEffect(() => {
-        store.getUser().then((data) => {
-            setUser(data)
-        })
-    }, [])
+    const {name, bio} = store.user
 
     return (
         <Layout>
-            <Avatar name={user.name} />
+            <Avatar name={name} />
 
-            <FullName name={user.name} />
+            <FullName name={name} />
 
             <div className={'center'}>
                 <Link href={'/profile/edit'}>
@@ -37,9 +32,9 @@ const Profile = () => {
                 </Link>
             </div>
 
-            <Bio bio={user.bio} />
+            <Bio bio={bio} />
         </Layout>
     );
 };
 
-export default Profile;
+export default observer(Profile);

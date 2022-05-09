@@ -1,12 +1,19 @@
 export const $routes = {
     index: '/',
     register: '/register',
+    registerRef: (ref='') => `/register?ref=${ref}`,
     login: '/login',
     profile: '/profile',
 }
 
 export const $apiRoutes = {
     transfer: 'transfer',
+    users: 'users',
+    login: 'login',
+    register: 'register',
+    refresh: 'refresh',
+    logout: 'logout',
+    changePassword: 'password',
     getMe: (name) => `/get-shop?domain_name=${name}`,
     user: '/user',
     products: {

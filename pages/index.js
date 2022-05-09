@@ -11,7 +11,7 @@ import InviteButton from "../components/InviteButton";
 import InlineButton from "../components/InlineButton";
 import Link from "next/link";
 import {BiTransferAlt} from "react-icons/bi";
-import Layout from "../Layout";
+import Layout from "../components/Layout";
 
 export default function Home() {
     const [isEarning, setIsEarning] = useState(false)

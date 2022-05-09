@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import store from "../store/store";
 import Link from "next/link";
 import {$routes} from "../http/routes";
+import Noty from "noty";
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -15,7 +16,27 @@ const Login = () => {
     const handlePasswordChange = (e) => setPassword(e.target.value)
 
     const handleLogin = () => {
-        store.login({email, password})
+        store.login({email, password}).then(rs => {
+            if(rs.status === 'error') {
+                if(rs.message !== '') {
+                    new Noty({
+                        theme: 'sunset',
+                        type: 'error',
+                        text: rs.message,
+                    }).show()
+                }
+
+                rs.errors.forEach((err) => {
+                    new Noty({
+                        theme: 'sunset',
+                        type: 'error',
+                        text: `${err.param}: ${err.msg}`,
+                    }).show()
+                })
+            } else {
+                router.push($routes.index)
+            }
+        })
     }
 
     return (

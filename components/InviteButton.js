@@ -3,10 +3,12 @@ import {FaUserPlus} from "react-icons/fa";
 import Button from "./Button";
 import {AiFillCloseCircle} from "react-icons/ai";
 import ReactModal from "react-modal";
+import {$routes} from "../http/routes";
+import store from "../store/store";
 
 const InviteButton = () => {
     const [showModal, setShowModal] = useState(false)
-    const [refLink, setRefLink] = useState('https://www.bondex-gg.club/register?ref=6GxBf')
+    const refLink = useState(process.env.NEXT_PUBLIC_APP_URL + $routes.registerRef(store.user.ref_code))
 
     const handleOpenModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)

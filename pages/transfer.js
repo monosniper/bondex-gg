@@ -1,24 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import Header from "../components/Header";
-import Normalizer from "../components/Normalizer";
-import Avatar from "../components/Avatar";
-import FullName from "../components/FullName";
-import Link from "next/link";
+import React, {useState} from 'react';
 import InlineButton from "../components/InlineButton";
 import {BiTransferAlt} from "react-icons/bi";
 import styles from '../styles/pages/Edit.module.scss'
-import Bio from "../components/Bio";
-import Navigation from "../components/Navigation";
 import store from "../store/store";
 import {$routes} from "../http/routes";
 import {useRouter} from "next/router";
-import Layout from "../Layout";
+import Layout from "../components/Layout";
 import {FiCopy} from "react-icons/fi";
 import Button from "../components/Button";
 import Noty from 'noty';
+import {observer} from "mobx-react-lite";
 
 const Transfer = () => {
-    const [user, setUser] = useState(store.defaultUser)
+    const user = store.user
     const [number, setNumber] = useState('')
     const [amount, setAmount] = useState(0.2)
     const router = useRouter()
@@ -42,17 +36,11 @@ const Transfer = () => {
         })
     }
 
-    useEffect(() => {
-        store.getUser().then((data) => {
-            setUser(data)
-        })
-    }, [])
-
     return (
         <Layout>
             <div className={styles.wrapper}>
                 <div className={'label'}>Your balance number</div>
-                <input type="text" readOnly value={user.number} className={'input'} />
+                <input type="text" style={{fontSize: 11}} readOnly value={user.number} className={'input'} />
 
                 <div className={'center'}>
                     <InlineButton
@@ -63,7 +51,7 @@ const Transfer = () => {
                 </div>
 
                 <div className={'label'}>Balance number</div>
-                <input type="text" placeholder={'egm_123456789...'} value={number} onChange={handleNumberChange} className={'input'} required />
+                <input type="text" placeholder={'0x123abc456...'} value={number} onChange={handleNumberChange} className={'input'} required />
 
                 <div className={'label'}>Amount ({process.env.NEXT_PUBLIC_CURRENCY_CODE})</div>
                 <input type="number" step={'0.1'} min={0.2} placeholder={'Amount'} value={amount} onChange={handleAmountChange} className={'input'} required />
@@ -78,4 +66,4 @@ const Transfer = () => {
     );
 };
 
-export default Transfer;
+export default observer(Transfer);

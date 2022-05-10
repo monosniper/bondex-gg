@@ -57,6 +57,8 @@ const Card = () => {
     return (
         <Layout>
             <div className={styles.wrapper}>
+                <img style={{maxWidth: '100%'}} src="/assets/img/card.png" alt="Card"/>
+
                 <div className={'label'}>Full name</div>
                 <input type="text" placeholder={'Your full name'} value={email} onChange={handleEmailChange} className={'input'} required />
 

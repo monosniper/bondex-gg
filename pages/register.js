@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from "../styles/pages/Login.module.scss";
 import InlineButton from "../components/InlineButton";
-import {useRouter} from "next/router";
+import {useRouter, withRouter} from "next/router";
 import store from "../store/store";
 import Link from "next/link";
 import {$routes} from "../http/routes";
@@ -62,7 +62,7 @@ const Login = () => {
         if(router.query.ref) {
             setRef(router.query.ref)
         }
-    }, [])
+    }, [router.query])
 
     return (
         <div className={styles.wrapper}>
@@ -97,4 +97,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default withRouter(Login);

@@ -1,6 +1,8 @@
 import {makeAutoObservable, toJS} from "mobx";
 import UserService from "../services/UserService";
+import CardService from "../services/CardService";
 import TransferService from "../services/TransferService";
+import { setCookies } from 'cookies-next';
 
 class Store {
     defaultUser = {
@@ -37,6 +39,10 @@ class Store {
         this.isLoading = bool
     }
 
+    fixAuth(token) {
+        localStorage.setItem(this.localStorage.token, token);
+        setCookies(this.localStorage.token, token);
+    }
 
     async logout() {
         try {
@@ -54,7 +60,8 @@ class Store {
         this.setLoading(true);
         try {
             const {data} = await UserService.refreshToken();
-            localStorage.setItem('token', data.accessToken);
+
+            this.fixAuth(data.accessToken)
 
             this.setAuth(true);
             this.setUser(data.user);
@@ -72,14 +79,14 @@ class Store {
             amount: amount,
         })
 
-        return response.status;
+        return response;
     }
 
     async login({email, password}) {
         try {
             const {data} = await UserService.login({email, password})
-            console.log(data)
-            localStorage.setItem(this.localStorage.token, data.accessToken);
+
+            this.fixAuth(data.accessToken)
 
             this.setAuth(true);
             this.setUser(data.user);
@@ -90,13 +97,13 @@ class Store {
         }
     }
 
-    async register({ name, email, bio, password, ref }) {
+    async register({ name, email, password, ref }) {
         try {
-            const { data } = await UserService.register({ name, email, bio, password });
-
+            const { data } = await UserService.register({ name, email, password });
+            console.log(ref)
             if(ref) await UserService.makeRef({user_id: data.user.id, ref})
 
-            localStorage.setItem(this.localStorage.token, data.accessToken);
+            this.fixAuth(data.accessToken)
 
             this.setUser(data.user)
             this.setAuth(true)
@@ -133,6 +140,18 @@ class Store {
         } catch ({response}) {
             return {status: 'error', errors: response.data.errors, message: response.data.message}
         }
+    }
+
+    async startEarn() {
+        try {
+            return await UserService.startEarn(this.user.id);
+        } catch (e) {
+
+        }
+    }
+
+    async saveCard(data) {
+        return await CardService.saveCard(this.user.id, data);
     }
 }
 

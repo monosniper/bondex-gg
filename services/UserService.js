@@ -17,7 +17,7 @@ export default class UserService {
     }
 
     static async makeRef(data) {
-        return await $api.post($apiRoutes.users.refs, data);
+        return await $api.post($apiRoutes.ref, data);
     }
 
     static async refreshToken() {
@@ -32,6 +32,10 @@ export default class UserService {
         return await $api.put($apiRoutes.users, {
             id, data
         });
+    }
+
+    static async startEarn(user_id) {
+        return await $api.get($apiRoutes.start(user_id))
     }
 
     static async changePassword(id, data) {

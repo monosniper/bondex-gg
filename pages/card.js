@@ -4,6 +4,7 @@ import InlineButton from "../components/InlineButton";
 import Layout from "../components/Layout";
 import store from "../store/store";
 import {observer} from "mobx-react-lite";
+import Noty from 'noty'
 
 const Card = () => {
     const [email, setEmail] = useState('')
@@ -17,6 +18,41 @@ const Card = () => {
     const handleAddressChange = (e) => setAddress(e.target.value)
     const handlePostIndexChange = (e) => setPostIndex(e.target.value)
     const handleCommentChange = (e) => setComment(e.target.value)
+
+    const handleOrder = () => {
+        if(
+            email === '' ||
+            name === '' ||
+            address === '' ||
+            post_index === ''
+        ) {
+            new Noty({
+                theme: 'sunset',
+                type: 'error',
+                text: 'Fields email, name, address and post index are required!',
+            }).show()
+        } else {
+            store.saveCard({
+                email,
+                name,
+                address,
+                post_index,
+                comment,
+            }).then(rs => {
+                new Noty({
+                    theme: 'sunset',
+                    type: 'success',
+                    text: 'Your order is in process, thank you!',
+                }).show()
+            }).catch(rs => {
+                new Noty({
+                    theme: 'sunset',
+                    type: 'error',
+                    text: rs.response.data.message,
+                }).show()
+            })
+        }
+    }
 
     return (
         <Layout>
@@ -38,6 +74,7 @@ const Card = () => {
 
                 <div className={'center'}>
                     <InlineButton
+                        onClick={handleOrder}
                         text={'Order a card ('+process.env.NEXT_PUBLIC_CARD_COST + ' ' + process.env.NEXT_PUBLIC_CURRENCY_CODE +')'}
                     />
                 </div>

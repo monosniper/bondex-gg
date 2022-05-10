@@ -1,22 +1,32 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from '../styles/components/Balance.module.scss'
 import {BsCurrencyBitcoin} from "react-icons/bs";
 import ReactMomentCountDown from 'react-moment-countdown';
 import {BiTimeFive} from "react-icons/bi";
+import store from "../store/store";
+import {observer} from "mobx-react-lite";
 
 const Balance = ({ isEarning=false }) => {
-    const [timeLeft, setTimeLeft] = useState(null)
-    const dateInFuture = new Date('2023-12-31');
+    const user = store.user;
+    const [balance, setBalance] = useState('0.0000')
+    const [timeLeft, setTimeLeft] = useState(Date.now() + (3600*1000*24))
+
+    useEffect(() => {
+        if(user.balance) {
+            setBalance(user.balance);
+            setTimeLeft(new Date(user.activeUntil));
+        }
+    }, [user])
 
     return (
         <div className={styles.balance + ' card'}>
             <div className={styles.balance__left}>
                 <div className={styles.balance__title}>Token Balance:</div>
-                <div className={styles.balance__count}>0.0000 <span>{process.env.NEXT_PUBLIC_CURRENCY_CODE}</span></div>
+                <div className={styles.balance__count}>{balance} <span>{process.env.NEXT_PUBLIC_CURRENCY_CODE}</span></div>
                 {isEarning ? (
                     <div className={styles.balance__time}>
                         <BiTimeFive />
-                        <ReactMomentCountDown toDate={dateInFuture} sourceFormatMask='HH:mm:ss' />
+                        <ReactMomentCountDown toDate={timeLeft} sourceFormatMask='HH:mm:ss' />
                     </div>
                 ) : null}
             </div>
@@ -27,4 +37,4 @@ const Balance = ({ isEarning=false }) => {
     );
 };
 
-export default Balance;
+export default observer(Balance);

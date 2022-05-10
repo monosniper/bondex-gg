@@ -13,6 +13,7 @@ import {observer} from "mobx-react-lite";
 
 const Transfer = () => {
     const user = store.user
+    const curr = process.env.NEXT_PUBLIC_CURRENCY_CODE
     const [number, setNumber] = useState('')
     const [amount, setAmount] = useState(0.2)
     const router = useRouter()
@@ -20,8 +21,21 @@ const Transfer = () => {
     const handleNumberChange = (e) => setNumber(e.target.value)
     const handleAmountChange = (e) => setAmount(e.target.value)
     const handleTransfer = () => {
-        store.makeTransfer({number, amount}).then(() => {
+        store.makeTransfer({number, amount}).then((rs) => {
+            console.log(rs)
+            new Noty({
+                theme: 'sunset',
+                type: 'success',
+                text: `${amount} ${curr} transferred to account ${number} successfully.`,
+            }).show();
+
             router.push($routes.index)
+        }).catch((rs) => {
+            new Noty({
+                theme: 'sunset',
+                type: 'error',
+                text: rs.response.data.message,
+            }).show();
         })
     }
     const handleCopy = () => {
@@ -53,7 +67,7 @@ const Transfer = () => {
                 <div className={'label'}>Balance number</div>
                 <input type="text" placeholder={'0x123abc456...'} value={number} onChange={handleNumberChange} className={'input'} required />
 
-                <div className={'label'}>Amount ({process.env.NEXT_PUBLIC_CURRENCY_CODE})</div>
+                <div className={'label'}>Amount ({curr})</div>
                 <input type="number" step={'0.1'} min={0.2} placeholder={'Amount'} value={amount} onChange={handleAmountChange} className={'input'} required />
             </div>
 

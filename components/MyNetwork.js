@@ -1,13 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "../styles/components/AnalyticsCard.module.scss";
 import {AiFillCloseCircle, AiFillInfoCircle} from "react-icons/ai";
 import ReactModal from "react-modal";
+import store from "../store/store";
+import {observer} from "mobx-react-lite";
 
 const MyNetwork = () => {
+    const user = store.user
     const [showModal, setShowModal] = useState(false)
+    const [refs_count, setRefsCount] = useState(0)
+    const [active_refs_count, setActiveRefsCount] = useState(0)
 
     const handleOpenModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)
+
+    useEffect(() => {
+        if(user.refs) {
+            setRefsCount(user.refs.all)
+            setActiveRefsCount(user.refs.active)
+        }
+    }, [user.refs])
 
     return (
         <div className={styles.card + ' card'}>
@@ -20,7 +32,7 @@ const MyNetwork = () => {
                 </div>
             </div>
             <div className={styles.card__body}>
-                0/0
+                {refs_count}/{active_refs_count}
             </div>
 
             <ReactModal
@@ -40,4 +52,4 @@ const MyNetwork = () => {
     );
 };
 
-export default MyNetwork;
+export default observer(MyNetwork);

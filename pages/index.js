@@ -5,16 +5,33 @@ import Normalizer from "../components/Normalizer";
 import Button from "../components/Button";
 import TokenRate from "../components/TokenRate";
 import MyNetwork from "../components/MyNetwork";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import StatusButton from "../components/StatusButton";
 import InviteButton from "../components/InviteButton";
 import InlineButton from "../components/InlineButton";
 import Link from "next/link";
 import {BiTransferAlt} from "react-icons/bi";
 import Layout from "../components/Layout";
+import {observer} from "mobx-react-lite";
+import store from "../store/store";
 
-export default function Home() {
+const Home = () => {
+    const user = store.user;
     const [isEarning, setIsEarning] = useState(false)
+
+    const handleEarn = () => {
+        if(user.isActive !== undefined) {
+            store.startEarn().then(() => {
+                setIsEarning(true)
+            })
+        }
+    }
+
+    useEffect(() => {
+        if(user.isActive !== undefined) {
+            setIsEarning(user.isActive)
+        }
+    }, [user.isActive])
 
     return (
         <Layout>
@@ -42,10 +59,12 @@ export default function Home() {
                 />
             ) : (
                 <Button
-                    onClick={() => setIsEarning(true)}
+                    onClick={handleEarn}
                     text={'Start earning now!'}
                 />
             )}
         </Layout>
     )
 }
+
+export default observer(Home)

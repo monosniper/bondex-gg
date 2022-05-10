@@ -3,8 +3,6 @@ import {$api} from "../http";
 
 export default class TransferService {
     static async makeTransfer(data) {
-        const response = await $api.post($apiRoutes.transfer, data);
-
-        return response.data;
+        return await $api.post($apiRoutes.transfer, data);
     }
 }

@@ -43,7 +43,7 @@ const Home = () => {
 
     return (
         <Layout>
-            <Balance isEarning={isEarning} handleStop />
+            <Balance isEarning={isEarning} handleStop={handleStop} />
 
             <InviteButton />
 

@@ -14,10 +14,13 @@ import {BiTransferAlt} from "react-icons/bi";
 import Layout from "../components/Layout";
 import {observer} from "mobx-react-lite";
 import store from "../store/store";
+import {AiFillCloseCircle} from "react-icons/ai";
+import ReactModal from "react-modal";
 
 const Home = () => {
     const user = store.user;
     const [isEarning, setIsEarning] = useState(false)
+    const [activeUntil, setActiveUntil] = useState(new Date())
 
     const handleEarn = () => {
         if(user.isActive !== undefined) {
@@ -35,15 +38,20 @@ const Home = () => {
         }
     }
 
+    const handleBuy = () => {
+
+    }
+
     useEffect(() => {
         if(user.isActive !== undefined) {
             setIsEarning(user.isActive)
+            setActiveUntil(user.activeUntil)
         }
-    }, [user.isActive])
+    }, [user])
 
     return (
         <Layout>
-            <Balance isEarning={isEarning} handleStop={handleStop} />
+            <Balance isEarning={isEarning} handleStop={handleStop} activeUntil={activeUntil} />
 
             <InviteButton />
 
@@ -71,6 +79,11 @@ const Home = () => {
                     text={'Start earning now!'}
                 />
             )}
+
+            <Button
+                onClick={handleBuy}
+                text={'Buy '+process.env.NEXT_PUBLIC_CURRENCY_NAME}
+            />
         </Layout>
     )
 }

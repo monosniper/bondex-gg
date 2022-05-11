@@ -21,6 +21,11 @@ const Navigation = () => {
                     <BsCurrencyBitcoin size={'3em'} />
                 </div>
             </Link>
+            <Link href={'/p2p'}>
+                <div style={{fontSize: '1.8em'}} className={styles.nav__item + ' ' + (router.pathname === '/p2p' ? styles.active : '')}>
+                    p2p
+                </div>
+            </Link>
             <Link href={'/card'}>
                 <div className={styles.nav__item + ' ' + (router.pathname === '/card' ? styles.active : '')}>
                     <AiFillCreditCard size={'3em'} />

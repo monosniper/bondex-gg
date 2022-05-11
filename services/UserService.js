@@ -35,7 +35,11 @@ export default class UserService {
     }
 
     static async startEarn(user_id) {
-        return await $api.get($apiRoutes.start(user_id))
+        return await $api.get($apiRoutes.farm.start(user_id))
+    }
+
+    static async endEarn(user_id) {
+        return await $api.get($apiRoutes.farm.end(user_id))
     }
 
     static async changePassword(id, data) {

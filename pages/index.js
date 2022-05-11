@@ -27,6 +27,14 @@ const Home = () => {
         }
     }
 
+    const handleStop = () => {
+        if(user.isActive !== undefined) {
+            store.endEarn().then(() => {
+                setIsEarning(false)
+            })
+        }
+    }
+
     useEffect(() => {
         if(user.isActive !== undefined) {
             setIsEarning(user.isActive)
@@ -35,7 +43,7 @@ const Home = () => {
 
     return (
         <Layout>
-            <Balance isEarning={isEarning} />
+            <Balance isEarning={isEarning} handleStop />
 
             <InviteButton />
 

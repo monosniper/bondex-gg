@@ -9,7 +9,10 @@ export const $routes = {
 export const $apiRoutes = {
     transfer: 'transfer',
     users: 'users',
-    start: (id) => `users/start/${id}`,
+    farm: {
+        start: (id) => `farm/start/${id}`,
+        end: (id) => `farm/end/${id}`,
+    },
     login: 'login',
     cards: 'cards',
     register: 'register',

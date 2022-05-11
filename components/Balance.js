@@ -6,15 +6,18 @@ import {BiTimeFive} from "react-icons/bi";
 import store from "../store/store";
 import {observer} from "mobx-react-lite";
 
-const Balance = ({ isEarning=false }) => {
+const Balance = ({ isEarning=false, handleStop=() => {} }) => {
     const user = store.user;
     const [balance, setBalance] = useState('0.0000')
-    const [timeLeft, setTimeLeft] = useState(Date.now() + (3600*1000*24))
+    const [timeLeft, setTimeLeft] = useState(new Date(Date.now() + (3600*1000*24)))
 
     useEffect(() => {
         if(user.balance) {
             setBalance(user.balance);
-            setTimeLeft(new Date(user.activeUntil));
+
+            if(new Date(user.activeUntil) < Date.now()) {
+                handleStop()
+            } else setTimeLeft(new Date(user.activeUntil));
         }
     }, [user])
 
@@ -26,7 +29,11 @@ const Balance = ({ isEarning=false }) => {
                 {isEarning ? (
                     <div className={styles.balance__time}>
                         <BiTimeFive />
-                        <ReactMomentCountDown toDate={timeLeft} sourceFormatMask='HH:mm:ss' />
+                        <ReactMomentCountDown
+                            toDate={timeLeft}
+                            sourceFormatMask='HH:mm:ss'
+                            onCountdownEnd={handleStop}
+                        />
                     </div>
                 ) : null}
             </div>

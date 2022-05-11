@@ -150,6 +150,14 @@ class Store {
         }
     }
 
+    async endEarn() {
+        try {
+            return await UserService.endEarn(this.user.id);
+        } catch (e) {
+
+        }
+    }
+
     async saveCard(data) {
         return await CardService.saveCard(this.user.id, data);
     }

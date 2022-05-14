@@ -8,11 +8,16 @@ import {useRouter} from "next/router";
 import {observer} from "mobx-react-lite";
 
 function MyApp({ Component, pageProps }) {
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-    store.checkAuth()
+    store.checkAuth().then(() => {
+      setIsLoading(false)
+      console.log({...store.user})
+    })
   }, [])
 
-  return <Component {...pageProps} />
+  return isLoading ? <p>loading</p> : <Component {...pageProps} />
 }
 
-export default observer(MyApp)
+export default MyApp

@@ -100,7 +100,7 @@ class Store {
     async register({ name, email, password, ref }) {
         try {
             const { data } = await UserService.register({ name, email, password });
-            console.log(ref)
+
             if(ref) await UserService.makeRef({user_id: data.user.id, ref})
 
             this.fixAuth(data.accessToken)
@@ -144,7 +144,17 @@ class Store {
 
     async startEarn() {
         try {
-            return await UserService.startEarn(this.user.id);
+            const response = await UserService.startEarn(this.user.id);
+
+            console.log(response)
+
+            this.setUser({
+                ...this.user,
+                activeUntil: response.data,
+                isActive: true,
+            })
+            console.log(toJS(this.user))
+            return response
         } catch (e) {
 
         }

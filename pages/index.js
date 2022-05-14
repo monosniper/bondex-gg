@@ -19,7 +19,8 @@ import ReactModal from "react-modal";
 
 const Home = () => {
     const user = store.user;
-    const [isEarning, setIsEarning] = useState(false)
+    const [isEarning, setIsEarning] = useState('0.0000')
+    const [balance, setBalance] = useState(false)
     const [activeUntil, setActiveUntil] = useState(new Date())
 
     const handleEarn = () => {
@@ -46,12 +47,18 @@ const Home = () => {
         if(user.isActive !== undefined) {
             setIsEarning(user.isActive)
             setActiveUntil(user.activeUntil)
+            setBalance(user.balance)
         }
     }, [user])
 
     return (
         <Layout>
-            <Balance isEarning={isEarning} handleStop={handleStop} activeUntil={activeUntil} />
+            <Balance
+                isEarning={isEarning}
+                balance={balance}
+                activeUntil={activeUntil}
+                handleStop={handleStop}
+            />
 
             <InviteButton />
 

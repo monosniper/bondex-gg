@@ -1,0 +1,36 @@
+@import "../vars";
+
+.card {
+  width: 100%;
+  padding: 15px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    color: black;
+  }
+
+  &__right {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}

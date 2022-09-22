@@ -1,7 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import Header from "../components/Header";
-import Normalizer from "../components/Normalizer";
-import Navigation from "../components/Navigation";
+import React from 'react';
 import {MdModeEditOutline} from "react-icons/md";
 import Link from "next/link";
 import Avatar from "../components/Avatar";
@@ -11,9 +8,40 @@ import Bio from "../components/Bio";
 import store from "../store/store";
 import Layout from "../components/Layout";
 import {observer} from "mobx-react-lite";
+import FakeBalanceCard from "../components/FakeBalanceCard";
+import useBalance from "../hooks/useBalance";
 
 const Profile = () => {
     const {name, bio} = store.user
+    const balance = useBalance()
+
+    const balances = [
+        {
+            title: 'EGM',
+            full_title: 'Enigma Coin',
+            balance
+        },
+        {
+            title: 'BTC',
+            full_title: 'Bitcoin',
+        },
+        {
+            title: 'BnB',
+            full_title: 'Binance Coin',
+        },
+        {
+            title: 'BUSD',
+            full_title: 'BUSD',
+        },
+        {
+            title: 'ETH',
+            full_title: 'Etherium',
+        },
+        {
+            title: 'USDT',
+            full_title: 'Tether',
+        },
+    ];
 
     return (
         <Layout>
@@ -33,6 +61,10 @@ const Profile = () => {
             </div>
 
             <Bio bio={bio} />
+
+            {balances.map((balance, i) => <div className="row">
+                <FakeBalanceCard {...balance} />
+            </div>)}
         </Layout>
     );
 };

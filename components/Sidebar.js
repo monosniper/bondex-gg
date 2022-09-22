@@ -9,6 +9,8 @@ import {GoBook} from "react-icons/go";
 import {observer} from "mobx-react-lite";
 import {$routes} from "../http/routes";
 import {useRouter} from "next/router";
+import {GiPayMoney} from "react-icons/gi";
+import {SERVER_URL} from "../http";
 
 const Sidebar = ({ name }) => {
     const router = useRouter()
@@ -40,9 +42,10 @@ const Sidebar = ({ name }) => {
             </div>
 
             <div className={styles.sidebar__menu}>
-                <div className={styles.sidebar__item}><GoBook size ='1.3em' />User Agreement</div>
-                <div className={styles.sidebar__item}><RiGitRepositoryPrivateLine size ='1.3em' />Privacy Policy</div>
-                <div className={styles.sidebar__item}><RiBook2Fill size={'1.3em'} />Learn more</div>
+                {/*<div className={styles.sidebar__item}><GoBook size ='1.3em' />User Agreement</div>*/}
+                <a href={SERVER_URL + '/privacy.docx'} target={'_blank'} className={styles.sidebar__item}><RiGitRepositoryPrivateLine size ='1.3em' />Privacy Policy</a>
+                <a href={'#'} target={'_blank'} className={styles.sidebar__item}><GiPayMoney size ='1.3em' />Investment</a>
+                {/*<div className={styles.sidebar__item}><RiBook2Fill size={'1.3em'} />Learn more</div>*/}
             </div>
 
             <InlineButton

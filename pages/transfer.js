@@ -10,6 +10,7 @@ import {FiCopy} from "react-icons/fi";
 import Button from "../components/Button";
 import Noty from 'noty';
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "next-i18next";
 
 const Transfer = () => {
     const user = store.user
@@ -17,6 +18,7 @@ const Transfer = () => {
     const [number, setNumber] = useState('')
     const [amount, setAmount] = useState(0.2)
     const router = useRouter()
+    const { t, i18n } = useTranslation();
 
     const handleNumberChange = (e) => setNumber(e.target.value)
     const handleAmountChange = (e) => setAmount(e.target.value)
@@ -26,7 +28,7 @@ const Transfer = () => {
             new Noty({
                 theme: 'sunset',
                 type: 'success',
-                text: `${amount} ${curr} transferred to account ${number} successfully.`,
+                text: `${amount} ${curr} ${t('transferred')} ${number} ${t('successfully')}.`,
             }).show();
 
             router.push($routes.index)
@@ -43,7 +45,7 @@ const Transfer = () => {
             new Noty({
                 theme: 'sunset',
                 type: 'success',
-                text: 'Copied successfully!',
+                text: t('сopied'),
             }).show();
         }).catch((e) => {
             console.log(e)
@@ -53,28 +55,28 @@ const Transfer = () => {
     return (
         <Layout>
             <div className={styles.wrapper}>
-                <div className={'label'}>Your balance number</div>
+                <div className={'label'}>{t('your balance number')}</div>
                 <input type="text" style={{fontSize: 11}} readOnly value={user.number} className={'input'} />
 
                 <div className={'center'}>
                     <InlineButton
                         onClick={handleCopy}
                         icon={<FiCopy />}
-                        text={'Copy'}
+                        text={t('copy')}
                     />
                 </div>
 
-                <div className={'label'}>Balance number</div>
+                <div className={'label'}>{t('balance number')}</div>
                 <input type="text" placeholder={'0x123abc456...'} value={number} onChange={handleNumberChange} className={'input'} required />
 
-                <div className={'label'}>Amount ({curr})</div>
-                <input type="number" step={'0.1'} min={0.2} placeholder={'Amount'} value={amount} onChange={handleAmountChange} className={'input'} required />
+                <div className={'label'}>{t('amount')} ({curr})</div>
+                <input type="number" step={'0.1'} min={0.2} placeholder={t('amount')} value={amount} onChange={handleAmountChange} className={'input'} required />
             </div>
 
             <Button
                 onClick={handleTransfer}
                 icon={<BiTransferAlt />}
-                text={'Transfer'}
+                text={t('transfer')}
             />
         </Layout>
     );

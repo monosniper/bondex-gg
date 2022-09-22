@@ -40,11 +40,17 @@ body {
   background: linear-gradient(90deg, #3c405aa6 0%, #272b48b0 100%);
   backdrop-filter: blur(1px);
 }
-
+img {
+  max-width: 100%;
+}
 .row {
   display: flex;
   gap: 1rem;
   padding: 0 10px;
+
+  &+.row {
+    margin-top: 10px;
+  }
 }
 
 .invite_btn {

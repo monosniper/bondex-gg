@@ -4,12 +4,14 @@ import styles from "../styles/components/AnalyticsCard.module.scss";
 import {AiFillCloseCircle, AiFillInfoCircle} from "react-icons/ai";
 import ReactModal from "react-modal";
 import Button from "./Button";
+import {useTranslation} from "next-i18next";
 
 const DepositBlock = () => {
     const user = store.user
     const [showModal, setShowModal] = useState(false)
     const [refs_count, setRefsCount] = useState(0)
     const [active_refs_count, setActiveRefsCount] = useState(0)
+    const { t, i18n } = useTranslation();
 
     const handleOpenModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)
@@ -29,17 +31,17 @@ const DepositBlock = () => {
         <div className={styles.card + ' card'}>
             <div className={styles.card__header}>
                 <div className={styles.card__title}>
-                    X3 Deposit
+                    {t('deposit')}
                 </div>
                 <div onClick={handleOpenModal} className={styles.card__info}>
                     <AiFillInfoCircle size={'1.2em'} />
                 </div>
             </div>
             <div className={styles.card__body} style={{fontWeight: 400, paddingBottom: 0}}>
-                When you first deposit to our exchange, you immediately get x3 of the deposit amount
+                {t('deposit_text')}
                 <Button
-                    onClick={handleClick}
-                    text={'Top up account'}
+                    onClick={() => store.setDepositModal(true)}
+                    text={t('get_bonus')}
                 />
             </div>
 
@@ -54,7 +56,7 @@ const DepositBlock = () => {
                         <AiFillCloseCircle size={'1.4em'} />
                     </button>
                 </div>
-                <p>If you deposit in USDT, then you will have x3 USDT on your balance. For example: You put 10 usdt on your account - then the balance will be 30 usdt</p>
+                <p>{t('deposit_info')}</p>
             </ReactModal>
         </div>
     );

@@ -4,11 +4,13 @@ import {AiFillCloseCircle, AiFillInfoCircle} from "react-icons/ai";
 import ReactModal from 'react-modal';
 import store from "../store/store";
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "next-i18next";
 
 const TokenRate = () => {
     const user = store.user;
     const [showModal, setShowModal] = useState(false)
     const [rate, setRate] = useState('0.0000')
+    const { t, i18n } = useTranslation();
 
     const handleOpenModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)
@@ -23,13 +25,13 @@ const TokenRate = () => {
         <div className={styles.card + ' card'}>
             <div className={styles.card__header}>
                 <div className={styles.card__title}>
-                    Token Rate
+                    {t('token rate')}
                 </div>
                 <div onClick={handleOpenModal} className={styles.card__info}>
                     <AiFillInfoCircle size={'1.2em'} />
                 </div>
             </div>
-            <div className={styles.card__body}>{rate} {process.env.NEXT_PUBLIC_CURRENCY_CODE}/Hr</div>
+            <div className={styles.card__body}>{rate} {process.env.NEXT_PUBLIC_CURRENCY_CODE}/{t('hour')}</div>
 
             <ReactModal
                 isOpen={showModal}
@@ -42,7 +44,7 @@ const TokenRate = () => {
                         <AiFillCloseCircle size={'1.4em'} />
                     </button>
                 </div>
-                <p>Token rate is the rate of currency farming per hour. It increases in direct proportion to the number of your referrals.</p>
+                <p>{t('token_rate_info')}</p>
             </ReactModal>
         </div>
     );

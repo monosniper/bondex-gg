@@ -18,6 +18,7 @@ class Store {
     }
     isSidebarShow = false
     isAuth = false
+    depositModalOpen = false
 
     constructor() {
         makeAutoObservable(this);
@@ -42,6 +43,10 @@ class Store {
     fixAuth(token) {
         localStorage.setItem(this.localStorage.token, token);
         setCookies(this.localStorage.token, token);
+    }
+
+    setDepositModal(bool) {
+        this.depositModalOpen = bool;
     }
 
     async logout() {

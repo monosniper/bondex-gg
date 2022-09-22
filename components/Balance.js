@@ -5,10 +5,12 @@ import {BiTimeFive} from "react-icons/bi";
 import store from "../store/store";
 import {observer} from "mobx-react-lite";
 import Countdown from "react-countdown";
+import {useTranslation} from "next-i18next";
 
 const Balance = ({ isEarning=false, balance, handleStop=() => {} }) => {
     const user = store.user;
     const [timeLeft, setTimeLeft] = useState(new Date(Date.now() + 3600 * 1000 * 24))
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         if(user.activeUntil) {
@@ -19,7 +21,7 @@ const Balance = ({ isEarning=false, balance, handleStop=() => {} }) => {
     return (
         <div className={styles.balance + ' card'}>
             <div className={styles.balance__left}>
-                <div className={styles.balance__title}>Token Balance:</div>
+                <div className={styles.balance__title}>{t('token_balance')}</div>
                 <div className={styles.balance__count}>{balance} <span>{process.env.NEXT_PUBLIC_CURRENCY_CODE}</span></div>
                 {isEarning ? (
                     <div className={styles.balance__time}>

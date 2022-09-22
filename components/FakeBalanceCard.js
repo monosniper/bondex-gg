@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from "../styles/components/FakeBalanceCard.module.scss";
 import Image from "next/image";
+import store from "../store/store";
 
 const FakeBalanceCard = ({ title, full_title, balance='0.0000' }) => {
     return (
-        <div className={styles.card + ' card'}>
+        <div onClick={() => store.setDepositModal(true)} className={styles.card + ' card'}>
             <div className={styles.card__left}>
                 <Image
                     src={'/assets/img/coins/'+title.toLowerCase()+'.png'}

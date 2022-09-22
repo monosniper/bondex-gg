@@ -1,41 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {FaUserPlus} from "react-icons/fa";
-import Button from "./Button";
-import {AiFillCloseCircle} from "react-icons/ai";
-import ReactModal from "react-modal";
-import {$routes} from "../http/routes";
-import store from "../store/store";
-import {observer} from "mobx-react-lite";
+import React, {useState} from 'react';
 import {useTranslation} from "next-i18next";
+import Button from "./Button";
+import {FaUserPlus} from "react-icons/fa";
+import ReactModal from "react-modal";
+import {AiFillCloseCircle} from "react-icons/ai";
+import {observer} from "mobx-react-lite";
 
-const InviteButton = () => {
-    const user = store.user;
+const WithDraw = () => {
     const [showModal, setShowModal] = useState(false)
-    const [ref, setRef] = useState(user.ref_code)
-    const [refLink, setRefLink] = useState(null)
     const { t, i18n } = useTranslation();
 
     const handleOpenModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)
 
-    useEffect(() => {
-        if(user.ref_code) {
-            setRef(user.ref_code)
-        }
-    }, [user])
-
-    useEffect(() => {
-        if(ref) {
-            setRefLink(process.env.NEXT_PUBLIC_APP_URL + $routes.registerRef(ref))
-        }
-    }, [ref])
-
     return (
         <div>
             <Button
                 onClick={handleOpenModal}
-                icon={<FaUserPlus size={'1.2em'}/>}
-                text={t('invite')}
+                // icon={<FaUserPlus size={'1.2em'}/>}
+                text={t('withdraw')}
                 className={'invite_btn'}
             />
 
@@ -50,11 +33,10 @@ const InviteButton = () => {
                         <AiFillCloseCircle size={'1.4em'} />
                     </button>
                 </div>
-                <p>{t('invite_info')}</p>
-                <a href={refLink}>{refLink ? refLink : '...'}</a>
+                <p>{t('withdraw_info')}</p>
             </ReactModal>
         </div>
     );
 };
 
-export default observer(InviteButton);
+export default observer(WithDraw);

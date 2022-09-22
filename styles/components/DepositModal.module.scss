@@ -1,0 +1,43 @@
+@import "../vars";
+
+.coins {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.coin {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  width: 76px;
+  align-items: center;
+  background: #ffffff29;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 10px;
+
+  &.active {
+    border: 2px solid $active_color;
+  }
+}
+
+.alert {
+  text-align: center;
+  border-radius: 10px;
+  padding: 20px;
+  background: #7e57b26e;
+  margin-bottom: 1rem;
+}
+
+.cash {
+  margin-top: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  padding: 20px;
+  word-break: break-all;
+  font-weight: bold;
+  background: #7e57b26e;
+  margin-bottom: 1rem;
+}

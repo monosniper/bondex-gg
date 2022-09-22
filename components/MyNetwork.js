@@ -4,12 +4,14 @@ import {AiFillCloseCircle, AiFillInfoCircle} from "react-icons/ai";
 import ReactModal from "react-modal";
 import store from "../store/store";
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "next-i18next";
 
 const MyNetwork = () => {
     const user = store.user
     const [showModal, setShowModal] = useState(false)
     const [refs_count, setRefsCount] = useState(0)
     const [active_refs_count, setActiveRefsCount] = useState(0)
+    const { t, i18n } = useTranslation();
 
     const handleOpenModal = () => setShowModal(true)
     const handleCloseModal = () => setShowModal(false)
@@ -25,7 +27,7 @@ const MyNetwork = () => {
         <div className={styles.card + ' card'}>
             <div className={styles.card__header}>
                 <div className={styles.card__title}>
-                    My Network
+                    {t('my_network')}
                 </div>
                 <div onClick={handleOpenModal} className={styles.card__info}>
                     <AiFillInfoCircle size={'1.2em'} />
@@ -46,7 +48,7 @@ const MyNetwork = () => {
                         <AiFillCloseCircle size={'1.4em'} />
                     </button>
                 </div>
-                <p>My Network is the number of your referrals / active at the moment. To get referrals click on the button &quot;Invite your contacts!&quot;.</p>
+                <p>{t('network_info')}</p>
             </ReactModal>
         </div>
     );

@@ -9,11 +9,16 @@ import {GoBook} from "react-icons/go";
 import {observer} from "mobx-react-lite";
 import {$routes} from "../http/routes";
 import {useRouter} from "next/router";
-import {GiPayMoney} from "react-icons/gi";
+import {GiHamburgerMenu, GiPayMoney} from "react-icons/gi";
 import {SERVER_URL} from "../http";
+import {useTranslation} from "next-i18next";
+import i18next from "i18next";
+import Cookies from 'js-cookie'
+import Link from "next/link";
 
 const Sidebar = ({ name }) => {
     const router = useRouter()
+    const { t, i18n } = useTranslation();
 
     const handleLogOut = () => {
         store.logout().then(() => router.push($routes.login))
@@ -25,6 +30,11 @@ const Sidebar = ({ name }) => {
 
     const handleProfileClick = () => {
         router.push($routes.profile).then(r => handleHide())
+    }
+
+    const changeLang = (lang) => {
+        i18next.changeLanguage(lang)
+        Cookies.set('lang', lang)
     }
 
     return (
@@ -43,15 +53,24 @@ const Sidebar = ({ name }) => {
 
             <div className={styles.sidebar__menu}>
                 {/*<div className={styles.sidebar__item}><GoBook size ='1.3em' />User Agreement</div>*/}
-                <a rel="noreferrer" href={SERVER_URL + '/privacy.docx'} target={'_blank'} className={styles.sidebar__item}><RiGitRepositoryPrivateLine size ='1.3em' />Privacy Policy</a>
-                <a rel="noreferrer" href={'#'} target={'_blank'} className={styles.sidebar__item}><GiPayMoney size ='1.3em' />Investment</a>
+                <a rel="noreferrer" href={SERVER_URL + '/privacy.docx'} target={'_blank'} className={styles.sidebar__item}><RiGitRepositoryPrivateLine size ='1.3em' />{t('privacy')}</a>
+                <Link href={'/investment'} onClick={handleHide}>
+                    <div className={styles.sidebar__item}><GiPayMoney size ='1.3em' />{t('investment')}</div>
+                </Link>
+                {/*<div className={styles.sidebar__item}><RiBook2Fill size={'1.3em'} />Learn more</div>*/}
+            </div>
+
+            <div className={styles.sidebar__menu}>
+                {/*<div className={styles.sidebar__item}><GoBook size ='1.3em' />User Agreement</div>*/}
+                <div onClick={() => changeLang('en')} className={styles.sidebar__item}>English</div>
+                <div onClick={() => changeLang('ru')} className={styles.sidebar__item}>Русский</div>
                 {/*<div className={styles.sidebar__item}><RiBook2Fill size={'1.3em'} />Learn more</div>*/}
             </div>
 
             <InlineButton
                 outline
                 onClick={handleLogOut}
-                text={'Log out'}
+                text={t('logout')}
             />
 
             <div className={styles.sidebar__footer}>

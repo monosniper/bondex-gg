@@ -8,6 +8,7 @@ import Noty from "noty";
 import {$routes} from "../../http/routes";
 import {useRouter} from "next/router";
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "next-i18next";
 
 const Edit = () => {
     const user = store.user
@@ -19,6 +20,7 @@ const Edit = () => {
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [newPasswordAgain, setNewPasswordAgain] = useState('')
+    const { t, i18n } = useTranslation();
 
     const handleEmailChange = (e) => setEmail(e.target.value)
     const handleNameChange = (e) => setName(e.target.value)
@@ -61,7 +63,7 @@ const Edit = () => {
                         new Noty({
                             theme: 'sunset',
                             type: 'success',
-                            text: `Updated successfully.`,
+                            text: t('updated'),
                         }).show()
                     }
                 })
@@ -69,14 +71,14 @@ const Edit = () => {
                 new Noty({
                     theme: 'sunset',
                     type: 'error',
-                    text: 'The email field is required!'
+                    text: t('validation_email')
                 }).show()
             }
         } else {
             new Noty({
                 theme: 'sunset',
                 type: 'error',
-                text: 'The name field is required!'
+                text: t('validation_name')
             }).show()
         }
     }
@@ -87,13 +89,13 @@ const Edit = () => {
                 new Noty({
                     theme: 'sunset',
                     type: 'error',
-                    text: 'New password is not equal his confirmation'
+                    text: t('validation_new_password_eq')
                 }).show()
             } else if (newPassword === '' || newPasswordAgain === '') {
                 new Noty({
                     theme: 'sunset',
                     type: 'error',
-                    text: 'New password fields are required to change password.'
+                    text: t('validation_new_password')
                 }).show()
             } else {
                 store.changePassword({oldPassword, newPassword}).then(rs => {
@@ -112,31 +114,31 @@ const Edit = () => {
     return (
         <Layout>
             <div className={styles.wrapper}>
-                <div className={'label'}>E-mail</div>
-                <input type="email" placeholder={'E-mail address'} value={email} onChange={handleEmailChange}
+                <div className={'label'}>{t('card_email')}</div>
+                <input type="email" placeholder={t('card_email_place')} value={email} onChange={handleEmailChange}
                        className={'input'} required/>
 
-                <div className={'label'}>Full name</div>
-                <input type="text" placeholder={'Full name'} value={name} onChange={handleNameChange}
+                <div className={'label'}>{t('card_full_name')}</div>
+                <input type="text" placeholder={t('card_full_name_place')} value={name} onChange={handleNameChange}
                        className={'input'} required/>
 
-                <div className={'label'}>Password</div>
-                <input type="password" placeholder={'Old password'} value={oldPassword}
+                <div className={'label'}>{t('password')}</div>
+                <input type="password" placeholder={t('old_password')} value={oldPassword}
                        onChange={handleOldPasswordChange} className={'input'}/>
-                <input type="password" placeholder={'New password'} value={newPassword}
+                <input type="password" placeholder={t('new_password')} value={newPassword}
                        onChange={handleNewPasswordChange} className={'input'}/>
-                <input type="password" placeholder={'New password again'} value={newPasswordAgain}
+                <input type="password" placeholder={t('new_password_again')} value={newPasswordAgain}
                        onChange={handleNewPasswordAgainChange} className={'input'}/>
 
-                <div className={'label'}>Bio</div>
-                <textarea placeholder={'Some info about you...'} rows={8} className={'input'} onChange={handleBioChange}
+                <div className={'label'}>{t('bio')}</div>
+                <textarea placeholder={t('bio_place')} rows={8} className={'input'} onChange={handleBioChange}
                           value={bio}/>
 
                 <div className={'center'}>
                     <InlineButton
                         onClick={handleSave}
                         icon={<BsCheckCircleFill/>}
-                        text={'Save'}
+                        text={t('save')}
                     />
                 </div>
             </div>

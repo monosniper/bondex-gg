@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import store from "../store/store";
 import {observer} from "mobx-react-lite";
 import Noty from 'noty'
+import {useTranslation} from "next-i18next";
 
 const Card = () => {
     const [email, setEmail] = useState('')
@@ -12,6 +13,7 @@ const Card = () => {
     const [address, setAddress] = useState('')
     const [post_index, setPostIndex] = useState('')
     const [comment, setComment] = useState('')
+    const { t, i18n } = useTranslation();
 
     const handleEmailChange = (e) => setEmail(e.target.value)
     const handleFullNameChange = (e) => setName(e.target.value)
@@ -29,7 +31,7 @@ const Card = () => {
             new Noty({
                 theme: 'sunset',
                 type: 'error',
-                text: 'Fields email, name, address and post index are required!',
+                text: t('validation_order_required'),
             }).show()
         } else {
             store.saveCard({
@@ -42,7 +44,7 @@ const Card = () => {
                 new Noty({
                     theme: 'sunset',
                     type: 'success',
-                    text: 'Your order is in process, thank you!',
+                    text: t('order in process'),
                 }).show()
             }).catch(rs => {
                 new Noty({
@@ -59,25 +61,25 @@ const Card = () => {
             <div className={styles.wrapper}>
                 <img style={{maxWidth: '100%'}} src="/assets/img/card.png" alt="Card"/>
 
-                <div className={'label'}>Full name</div>
-                <input type="text" placeholder={'Your full name'} value={email} onChange={handleEmailChange} className={'input'} required />
+                <div className={'label'}>{t('card_full_name')}</div>
+                <input type="text" placeholder={t('card_full_name_place')} value={email} onChange={handleEmailChange} className={'input'} required />
 
-                <div className={'label'}>E-mail</div>
-                <input type="email" placeholder={'E-mail address'} value={name} onChange={handleFullNameChange} className={'input'} required />
+                <div className={'label'}>{t('card_email')}</div>
+                <input type="email" placeholder={t('card_email_place')} value={name} onChange={handleFullNameChange} className={'input'} required />
 
-                <div className={'label'}>Address</div>
-                <input type="text" placeholder={'Delivery address'} value={address} onChange={handleAddressChange} className={'input'} required />
+                <div className={'label'}>{t('card_address')}</div>
+                <input type="text" placeholder={t('card_address_place')} value={address} onChange={handleAddressChange} className={'input'} required />
 
-                <div className={'label'}>Post Index</div>
-                <input type="text" placeholder={'Post Index'} value={post_index} onChange={handlePostIndexChange} className={'input'} required />
+                <div className={'label'}>{t('card_post')}</div>
+                <input type="text" placeholder={t('card_post_place')} value={post_index} onChange={handlePostIndexChange} className={'input'} required />
 
-                <div className={'label'}>Comment</div>
-                <textarea placeholder={'Your comment for the delivery...'} rows={8} onChange={handleCommentChange} value={comment} className={'input'} />
+                <div className={'label'}>{t('card_comment')}</div>
+                <textarea placeholder={t('card_comment_place')} rows={8} onChange={handleCommentChange} value={comment} className={'input'} />
 
                 <div className={'center'}>
                     <InlineButton
                         onClick={handleOrder}
-                        text={'Order a card ('+process.env.NEXT_PUBLIC_CARD_COST + ' ' + process.env.NEXT_PUBLIC_CURRENCY_CODE +')'}
+                        text={t('order card') + ' ('+process.env.NEXT_PUBLIC_CARD_COST + ' ' + process.env.NEXT_PUBLIC_CURRENCY_CODE +')'}
                     />
                 </div>
             </div>

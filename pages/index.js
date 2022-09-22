@@ -12,12 +12,14 @@ import {observer} from "mobx-react-lite";
 import store from "../store/store";
 import DepositBlock from "../components/DepositBlock";
 import useBalance from "../hooks/useBalance";
+import {useTranslation} from "next-i18next";
 
 const Home = () => {
     const user = store.user;
     const [isEarning, setIsEarning] = useState('0.0000')
     const [activeUntil, setActiveUntil] = useState(new Date())
     const balance = useBalance()
+    const { t, i18n } = useTranslation();
 
     const handleEarn = () => {
         if(user.isActive !== undefined) {
@@ -70,25 +72,25 @@ const Home = () => {
                 <div>
                     <Button
                         icon={<BiTransferAlt />}
-                        text={'Transfer '+process.env.NEXT_PUBLIC_CURRENCY_CODE}
+                        text={t('transfer')+' '+process.env.NEXT_PUBLIC_CURRENCY_CODE}
                     />
                 </div>
             </Link>
 
             {isEarning ? (
                 <StatusButton
-                    text={'Currently Earning'}
+                    text={t('earning')}
                 />
             ) : (
                 <Button
                     onClick={handleEarn}
-                    text={'Start earning now!'}
+                    text={t('earning start')}
                 />
             )}
 
             <Button
                 onClick={handleBuy}
-                text={'Buy '+process.env.NEXT_PUBLIC_CURRENCY_NAME}
+                text={t('buy')+' '+process.env.NEXT_PUBLIC_CURRENCY_NAME}
             />
         </Layout>
     )

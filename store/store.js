@@ -13,6 +13,7 @@ class Store {
     }
     user = {...this.defaultUser}
     localStorage = {
+        refreshToken: 'refreshToken',
         token: 'token',
         user: 'user',
     }
@@ -43,6 +44,7 @@ class Store {
     fixAuth(token) {
         localStorage.setItem(this.localStorage.token, token);
         setCookies(this.localStorage.token, token);
+        setCookies(this.localStorage.refreshToken, token);
     }
 
     setDepositModal(bool) {

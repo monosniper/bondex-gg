@@ -50,7 +50,7 @@
     "invite_info": "Share this link to your friends to make them your referrals:",
     "deposit": "X3 Deposit",
     "deposit_text": "When you first deposit to our exchange, you immediately get x3 of the deposit amount",
-    "deposit_info": "If you deposit in USDT, then you will have x3 USDT on your balance. For example: You put 10 usdt on your account - then the balance will be 30 usdt",
+    "deposit_info": "If you deposit in USDT, then you will have x3 USDT on your balance. For example: You put 10 usdt on your account - then the balance will be 30 usdt. Which will be instantly available for withdrawal",
     "get_bonus": "Get a Bonus",
     "token_balance": "Token Balance:",
     "deposit_alert": "The minimum deposit amount is $10\nBEP20 network",

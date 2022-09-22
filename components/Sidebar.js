@@ -43,8 +43,8 @@ const Sidebar = ({ name }) => {
 
             <div className={styles.sidebar__menu}>
                 {/*<div className={styles.sidebar__item}><GoBook size ='1.3em' />User Agreement</div>*/}
-                <a href={SERVER_URL + '/privacy.docx'} target={'_blank'} className={styles.sidebar__item}><RiGitRepositoryPrivateLine size ='1.3em' />Privacy Policy</a>
-                <a href={'#'} target={'_blank'} className={styles.sidebar__item}><GiPayMoney size ='1.3em' />Investment</a>
+                <a rel="noreferrer" href={SERVER_URL + '/privacy.docx'} target={'_blank'} className={styles.sidebar__item}><RiGitRepositoryPrivateLine size ='1.3em' />Privacy Policy</a>
+                <a rel="noreferrer" href={'#'} target={'_blank'} className={styles.sidebar__item}><GiPayMoney size ='1.3em' />Investment</a>
                 {/*<div className={styles.sidebar__item}><RiBook2Fill size={'1.3em'} />Learn more</div>*/}
             </div>
 

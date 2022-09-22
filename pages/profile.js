@@ -63,7 +63,7 @@ const Profile = () => {
             <Bio bio={bio} />
 
             {balances.map((balance, i) => <div className="row">
-                <FakeBalanceCard {...balance} />
+                <FakeBalanceCard key={'balance-'+i} {...balance} />
             </div>)}
         </Layout>
     );

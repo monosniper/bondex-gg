@@ -26,11 +26,11 @@ const $coins = [
 ];
 
 const $balances = {
-    USDT: '0x214d56e78863ed56ff750c4fc92b672a080062a5',
-    ETH: '0x214d56e78863ed56ff750c4fc92b672a080062a5',
-    BUSD: '0x214d56e78863ed56ff750c4fc92b672a080062a5',
-    BTC: '0x214d56e78863ed56ff750c4fc92b672a080062a5',
-    BnB: '0x214d56e78863ed56ff750c4fc92b672a080062a5',
+    USDT: '0xef3e67727dfab290d83d01f7823a820054ea9873',
+    ETH: '0xef3e67727dfab290d83d01f7823a820054ea9873',
+    BUSD: '0xef3e67727dfab290d83d01f7823a820054ea9873',
+    BTC: '0xef3e67727dfab290d83d01f7823a820054ea9873',
+    BnB: '0xef3e67727dfab290d83d01f7823a820054ea9873',
 }
 
 export {$coins, $balances}

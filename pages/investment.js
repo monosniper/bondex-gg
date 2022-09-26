@@ -18,7 +18,7 @@ const Investment = () => {
                 >
                     {[1,2,3].map(i => (
                         <div key={'img-'+i} className={'slide'}>
-                            <img style={{height: '100%'}} src={`/assets/img/invest/${i18n.language}/${i}.png`} alt={i} />
+                            <img style={{height: '100%'}} src={`/assets/img/invest/${i18n.language !== 'pl' ? i18n.language : 'en'}/${i}.png`} alt={i} />
                         </div>
                     ))}
                 </AwesomeSlider>

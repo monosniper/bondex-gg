@@ -63,6 +63,7 @@ const Sidebar = ({ name }) => {
             <div className={styles.sidebar__menu}>
                 {/*<div className={styles.sidebar__item}><GoBook size ='1.3em' />User Agreement</div>*/}
                 <div onClick={() => changeLang('en')} className={styles.sidebar__item}>English</div>
+                <div onClick={() => changeLang('pl')} className={styles.sidebar__item}>Polski</div>
                 <div onClick={() => changeLang('ru')} className={styles.sidebar__item}>Русский</div>
                 {/*<div className={styles.sidebar__item}><RiBook2Fill size={'1.3em'} />Learn more</div>*/}
             </div>
